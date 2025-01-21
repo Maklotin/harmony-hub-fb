@@ -1,12 +1,28 @@
+@font-face {
+  font-family: 'Audiowide';
+  src: url('/fonts/Audiowide-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 html,
 body {
-  @apply bg-white dark:bg-[#0F0326];
+  @apply font-sans bg-white dark:bg-[#0F0326];
 
   @media (prefers-color-scheme: dark) {
     color-scheme: dark;
   }
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: 'Audiowide', cursive;
 }
