@@ -30,7 +30,7 @@ export default function Index() {
 
   return (
     <div>
-      <h1>Harmony Hub</h1>
+      <img src="/HarmonyHubLogo.svg" />
       {user ? <p>Welcome back!</p> : <Login />}
     </div>
   );
