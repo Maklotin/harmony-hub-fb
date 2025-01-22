@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 @font-face {
   font-family: 'Audiowide';
   src: url('/fonts/Audiowide-Regular.ttf') format('truetype');
@@ -5,24 +9,66 @@
   font-style: normal;
 }
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@layer base {
 
-html,
-body {
-  @apply font-sans bg-white dark:bg-[#0F0326];
+  html,
+  body {
+    @apply font-sans bg-white dark:bg-[#0F0326];
 
-  @media (prefers-color-scheme: dark) {
-    color-scheme: dark;
+    @media (prefers-color-scheme: dark) {
+      color-scheme: dark;
+    }
+  }
+
+  h1 {
+    @apply text-6xl font-audiowide;
+  }
+
+  h2 {
+    @apply text-5xl font-audiowide;
+  }
+
+  h3 {
+    @apply text-4xl font-audiowide;
+  }
+
+  h4 {
+    @apply text-3xl font-audiowide;
+  }
+
+  h5 {
+    @apply text-2xl font-audiowide;
+  }
+
+  h6 {
+    @apply text-xl font-audiowide;
+  }
+
+  progress {
+    @apply w-full h-6;
+    appearance: none;
+    -webkit-appearance: none;
+    border-radius: 0.75rem;
+  }
+
+  progress::-webkit-progress-bar {
+    @apply bg-darkPurple;
+    border-radius: 0.75rem;
+  }
+
+  progress::-webkit-progress-value {
+    @apply bg-saffron;
+    border-radius: 0.75rem;
+  }
+
+  progress::-moz-progress-bar {
+    @apply bg-saffron;
+    border-radius: 0.75rem;
   }
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  font-family: 'Audiowide', cursive;
+@layer components {
+  .font-audiowide {
+    font-family: 'Audiowide', cursive;
+  }
 }

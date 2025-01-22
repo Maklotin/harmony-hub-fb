@@ -1,6 +1,8 @@
 import type { MetaFunction } from "@remix-run/node";
 import Login from "./login";
 import { useAuth } from "react-oidc-context";
+import Home from "./home";
+import { ClickableLogo } from "~/components/ui-library";
 
 export const meta: MetaFunction = () => {
   return [
@@ -12,13 +14,13 @@ export const meta: MetaFunction = () => {
 export default function Index() {
   const auth = useAuth();
 
-  // function signOutRedirect() {
-  //   const clientId = process.env.CLIENT_ID;
-  //   const logoutUri = process.env.LOGOUT_URI;
-  //   const cognitoDomain = process.env.COGNITO_DOMAIN;
-  //   window.location.href = `${cognitoDomain}/logout?client_id=${clientId}&logout_uri=${encodeURIComponent(logoutUri)}`;
-  // }
-  // const user = false;
+  function signOutRedirect() {
+    const clientId = process.env.CLIENT_ID;
+    const logoutUri = process.env.LOGOUT_URI as string;
+    const cognitoDomain = process.env.COGNITO_DOMAIN;
+    window.location.href = `${cognitoDomain}/logout?client_id=${clientId}&logout_uri=${encodeURIComponent(logoutUri)}`;
+  }
+  const user = false;
 
   if (auth.isLoading) {
     return <p>Loading...</p>;
@@ -30,10 +32,9 @@ export default function Index() {
 
   return (
     <div>
-      <img alt="Harmony Hub Logo" src="/HarmonyHubLogo.svg" draggable="false" className="max-w-96 p-8" />
+      <ClickableLogo />
       <div className="flex flex-col items-center">
-        {/* {user ? <p>Welcome back!</p> : <Login />} */}
-        <Login />
+        {user ? <Home /> : <Login />}
       </div>
     </div>
   );

@@ -10,11 +10,17 @@ export default {
       colors: {
         primary: "#0F0326",
         bPrimary: "#451F55",
+        darkPurple: "#22162B",
+        ultraViolet: "#724E91",
         saffron: "#F8C630",
         blush: "#E54F6D",
+        emerald: "#06D6A0",
+        darkForest: "#1B3022",
       },
       boxShadow: {
-        primaryButton: "4px 4px 0px !important",
+        primaryButton: "4px 4px 0px",
+        primaryButtonHover: "6px 6px 0px -2px",
+        blackNoFade: "4px 4px 0px black",
       },
       dropShadow: {
         buttonText1: "1px 1px rgba(229, 79, 109, 0.25)",
