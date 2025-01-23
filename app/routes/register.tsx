@@ -1,4 +1,3 @@
-import { CognitoUserAttribute } from "amazon-cognito-identity-js";
 import { useState } from "react";
 import {
   Box,
@@ -56,7 +55,6 @@ export default function Register() {
                 placeholder="passord123"
                 required
               />
-              {error && <p className="text-red-500">{error}</p>}
               <Button type="submit" className="bg-emerald !shadow-darkForest">
                 <p>Fullfør registrering</p>
                 <i className="ri-check-line ml-2"></i>

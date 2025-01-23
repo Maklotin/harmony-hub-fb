@@ -1,5 +1,9 @@
 import { Links, Meta, Outlet, Scripts, ScrollRestoration } from "@remix-run/react";
 import type { LinksFunction } from "@remix-run/node";
+import { Amplify } from "aws-amplify";
+import { withAuthenticator } from "@aws-amplify/ui-react";
+import awsconfig from "../src/aws-exports"
+
 
 import "./tailwind.css";
 
@@ -20,6 +24,9 @@ export const links: LinksFunction = () => [
   },
 ];
 
+Amplify.configure(awsconfig);
+
+
 export function Layout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
@@ -38,6 +45,8 @@ export function Layout({ children }: { children: React.ReactNode }) {
   );
 }
 
-export default function App() {
+function App() {
   return <Outlet />;
 }
+
+export default withAuthenticator(App);
