@@ -13,7 +13,7 @@ export const meta: MetaFunction = () => {
 export default function Index() {
   return (
     <div>
-      <div>
+      <div className="flex justify-between flex-wrap">
         <ClickableLogo />
         <Nav />
       </div>

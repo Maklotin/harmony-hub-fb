@@ -2,7 +2,7 @@ import React, { useState, useCallback } from "react";
 import Select from "react-select";
 import Anthropic from "@anthropic-ai/sdk";
 import optionsJSON from "../utils/options.json";
-import { Box, Button, SongCard, TextInput } from "./ui-library";
+import { Box, Button, LoadingSpinner, SongCard, TextInput } from "./ui-library";
 import responseStructure from "../utils/responseStructure.json";
 
 interface Message {
@@ -133,10 +133,10 @@ const DiscoverMusic = () => {
     });
   }, []);
 
-  const fetchSpotifyLink = async (trackName: string) => {
+  const fetchSpotifyLink = async (trackName: string, artist: string) => {
     const accessToken = await getSpotifyAccessToken();
     const response = await fetch(
-      `https://api.spotify.com/v1/search?q=track:${trackName}&type=track`,
+      `https://api.spotify.com/v1/search?q=artist:${artist} track:${trackName}&type=track&limit=1`,
       {
         headers: {
           Authorization: `Bearer ${accessToken}`,
@@ -153,18 +153,22 @@ const DiscoverMusic = () => {
   };
 
   const fetchAlbumCover = async (artistName: string, albumName: string) => {
-    const response = await fetch(
-      `http://ws.audioscrobbler.com/2.0/?method=album.getinfo&api_key=${
-        import.meta.env.VITE_LASTFM_API_KEY
-      }&artist=${artistName}&album=${albumName}&format=json`
-    );
+    try {
+      const response = await fetch(
+        `http://ws.audioscrobbler.com/2.0/?method=album.getinfo&api_key=${
+          import.meta.env.VITE_LASTFM_API_KEY
+        }&artist=${artistName}&album=${albumName}&format=json`
+      );
 
-    if (!response.ok) {
-      throw new Error("Failed to fetch album cover");
+      if (!response.ok) {
+        throw new Error("Failed to fetch album cover");
+      }
+
+      const data = await response.json();
+      return data.album?.image[3]["#text"] || "public/album_placeholder.png";
+    } catch {
+      return "public/album_placeholder.png";
     }
-
-    const data = await response.json();
-    return data.album?.image[3]["#text"] || "";
   };
 
   const sendMessageToClaude = async () => {
@@ -203,7 +207,7 @@ const DiscoverMusic = () => {
 
       for (const key in parsedResponse) {
         const song = parsedResponse[key];
-        song.link.spotify = await fetchSpotifyLink(song.title);
+        song.link.spotify = await fetchSpotifyLink(song.title, song.artist);
         song.albumcover = await fetchAlbumCover(song.artist, song.album);
       }
 
@@ -227,7 +231,10 @@ const DiscoverMusic = () => {
 
   return (
     <Box className="p-4 w-2/3">
-      <form className="w-full flex flex-col items-center" onSubmit={(e) => e.preventDefault()}>
+      <form
+        className="w-full flex flex-col items-center"
+        onSubmit={(e) => e.preventDefault()}
+      >
         <h1 className="font-bold mb-4 text-saffron drop-shadow-textShadow2 !shadow-blush">
           Discover new music!
         </h1>
@@ -295,7 +302,7 @@ const DiscoverMusic = () => {
 
         <div className="flex flex-wrap justify-center space-x-4 mt-4">
           {loading ? (
-            <div className="text-gray-400 text-center">Loading...</div>
+            <LoadingSpinner />
           ) : (
             songs &&
             Object.values(songs).map((song: any, index: number) => (

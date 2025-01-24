@@ -105,6 +105,7 @@ export function SongCard({
 }: SongCardProps) {
   const titleRef = React.useRef<HTMLHeadingElement>(null);
   const albumRef = React.useRef<HTMLParagraphElement>(null);
+  const artistRef = React.useRef<HTMLHeadingElement>(null);
 
   React.useEffect(() => {
     if (titleRef.current) {
@@ -112,17 +113,23 @@ export function SongCard({
         minSize: 12,
         maxSize: 24,
       });
-      if (albumRef.current) {
-        fitty(albumRef.current, {
-          minSize: 8,
-          maxSize: 16,
-        });
-      }
+    }
+    if (albumRef.current) {
+      fitty(albumRef.current, {
+        minSize: 8,
+        maxSize: 16,
+      });
+    }
+    if (artistRef.current) {
+      fitty(artistRef.current, {
+        minSize: 8,
+        maxSize: 24,
+      });
     }
   }, []);
 
   return (
-    <Box className="w-72 py-2">
+    <Box className="w-72 p-2">
       <h4
         ref={titleRef}
         className="h-10 overflow-hidden text-ellipsis whitespace-nowrap"
@@ -140,7 +147,10 @@ export function SongCard({
         alt={album + " album cover"}
         className="w-60 shadow-imgShadow shadow-blush my-4"
       />
-      <h5 className="overflow-hidden text-ellipsis whitespace-nowrap">
+      <h5
+        ref={artistRef}
+        className="overflow-hidden text-ellipsis whitespace-nowrap"
+      >
         {artist}
       </h5>
       <p className="overflow-hidden text-ellipsis whitespace-nowrap">
@@ -149,12 +159,47 @@ export function SongCard({
       <p className="text-xs overflow-hidden text-ellipsis whitespace-nowrap">
         {genre}
       </p>
-      <Textlink to={link.spotify} target="_blank">
-        Listen on Spotify
-      </Textlink>
+      {link.spotify.length ? (
+        <Textlink to={link.spotify} target="_blank">
+          Listen on Spotify
+        </Textlink>
+      ) : (
+        <p className="text-xs text-saffron mt-2 italic">
+          No spotify link available
+        </p>
+      )}
+
       <Textlink to={link.youtube} target="_blank">
         Watch on YouTube
       </Textlink>
     </Box>
+  );
+}
+
+export function LoadingSpinner() {
+  return (
+    <div className="flex justify-center items-center w-full h-full">
+      <i className="ri-disc-line animate-spin text-saffron text-9xl"></i>
+    </div>
+  );
+}
+
+interface NavbuttonProps extends RemixLinkProps {
+  icon: string;
+}
+
+export function Navbutton({ icon, className, to, children, ...props }: NavbuttonProps) {
+  return (
+    <Link
+      to={to}
+      className={cn(
+        "text-blush hover:text-saffron transition-all duration-300 flex flex-row ",
+        className
+      )}
+      {...props}
+    >
+      <i className={cn(icon, " text-4xl mr-2")}></i>
+      <h3>{children}</h3>
+    </Link>
   );
 }
