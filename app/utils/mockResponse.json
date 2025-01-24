@@ -1,0 +1,38 @@
+{
+  "1": {
+    "title": "Over and over",
+    "artist": "MC5",
+    "album": "High Time",
+    "released": "1971",
+    "genre": "protopunk, punk rock",
+    "albumcover": "https://upload.wikimedia.org/wikipedia/en/d/d2/HighTimeMC5.jpg",
+    "link": {
+      "spotify": "https://open.spotify.com/track/1p6RP1wybA3ELF2vJ2TVqf",
+      "youtube": "https://www.youtube.com/watch?v=VMGOg8vB4Dc"
+    }
+  },
+  "2": {
+    "title": "Asa",
+    "artist": "Char",
+    "album": "Char",
+    "released": "1976",
+    "genre": "citypop, rock",
+    "albumcover": "https://cdn-images.dzcdn.net/images/cover/935e75b079ea6b27332531fbe0607330/0x1900-000000-80-0-0.jpg",
+    "link": {
+      "spotify": "https://open.spotify.com/track/0Guas00T1Kz5Cd45NGUvde?si=64ac6b4c850c46c0",
+      "youtube": "https://www.youtube.com/watch?v=ByuLtqAl2YA"
+    }
+  },
+  "3": {
+    "title": "Hey Joe",
+    "artist": "The Music Machine",
+    "album": "(Turn On) The Music Machine",
+    "released": "1966",
+    "genre": "garage rock, psychadelic rock",
+    "albumcover": "https://cdn-images.dzcdn.net/images/cover/6ccb9cd3549c9d77f2ad36d79bdb9601/0x1900-000000-80-0-0.jpg",
+    "link": {
+      "spotify": "https://open.spotify.com/track/0zmHG5J57zo3hQZVasNwjL",
+      "youtube": "https://www.youtube.com/watch?v=f7y3SrJfNic"
+    }
+  }
+}

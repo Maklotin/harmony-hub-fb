@@ -1,0 +1,38 @@
+{
+  "1": {
+    "title": "[SONG TITLE]",
+    "artist": "[ARTIST NAME]",
+    "album": "[ALBUM NAME]",
+    "released": "[RELEASE YEAR]",
+    "genre": "[GENRE 1], [GENRE 2]",
+    "albumcover": "[ALBUM COVER URL]",
+    "link": {
+      "spotify": "[SPOTIFY SONG LINK]",
+      "youtube": "[YOUTUBE SONG LINK]"
+    }
+  },
+  "2": {
+    "title": "[SONG TITLE]",
+    "artist": "[ARTIST NAME]",
+    "album": "[ALBUM NAME]",
+    "released": "[RELEASE YEAR]",
+    "genre": "[GENRE 1], [GENRE 2]",
+    "albumcover": "[ALBUM COVER URL]",
+    "link": {
+      "spotify": "[SPOTIFY SONG LINK]",
+      "youtube": "[YOUTUBE SONG LINK]"
+    }
+  },
+  "3": {
+    "title": "[SONG TITLE]",
+    "artist": "[ARTIST NAME]",
+    "album": "[ALBUM NAME]",
+    "released": "[RELEASE YEAR]",
+    "genre": "[GENRE 1], [GENRE 2]",
+    "albumcover": "[ALBUM COVER URL]",
+    "link": {
+      "spotify": "[SPOTIFY SONG LINK]",
+      "youtube": "[YOUTUBE SONG LINK]"
+    }
+  }
+}

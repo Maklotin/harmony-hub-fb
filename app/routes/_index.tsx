@@ -1,10 +1,7 @@
 import type { MetaFunction } from "@remix-run/node";
-import Home from "./home";
+import DiscoverMusic from "~/components/DiscoverMusic";
+import Nav from "~/components/Nav";
 import { ClickableLogo } from "~/components/ui-library";
-import { useEffect, useState } from "react";
-import userpool from "~/utils/userpool";
-import { Navigate, useNavigate } from "@remix-run/react";
-import Login from "./login";
 
 export const meta: MetaFunction = () => {
   return [
@@ -14,12 +11,14 @@ export const meta: MetaFunction = () => {
 };
 
 export default function Index() {
-
   return (
     <div>
-      <ClickableLogo />
+      <div>
+        <ClickableLogo />
+        <Nav />
+      </div>
       <div className="flex flex-col items-center">
-        <Home />
+      <DiscoverMusic />
       </div>
     </div>
   );
