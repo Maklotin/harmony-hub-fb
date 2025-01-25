@@ -17,7 +17,7 @@
     "@remix-run/react": "^2.15.2",
     "@remix-run/serve": "^2.15.2",
     "amazon-cognito-identity-js": "^6.3.12",
-    "aws-amplify": "^6.12.1",
+    "aws-amplify": "^6.12.2",
     "clsx": "^2.1.1",
     "dotenv": "^16.4.7",
     "fitty": "^2.4.2",

@@ -77,7 +77,7 @@ const DiscoverMusic = () => {
   const [selectedTheme, setSelectedTheme] = useState<string | null>(null);
   const [selectedTempo, setSelectedTempo] = useState<string | null>(null);
   const [messages, setMessages] = useState<Message[]>([]);
-  const [inputText, setInputText] = useState("");
+  const [inputText, setInputText] = useState("No additional information");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [advanced, setAdvanced] = useState(false);
@@ -218,7 +218,7 @@ const DiscoverMusic = () => {
       ]);
 
       setSongs(parsedResponse);
-      setInputText("");
+      setInputText("No additional information");
     } catch (err: unknown) {
       setError(
         (err as Error).message || "An error occurred while sending the message"
@@ -284,10 +284,11 @@ const DiscoverMusic = () => {
           />
           <Button
             onClick={sendMessageToClaude}
-            disabled={loading || !inputText.trim()}
+            disabled={loading}
             type="submit"
+            className="disabled:bg-blush disabled:!shadow-ultraViolet disabled:cursor-not-allowed"
           >
-            {loading ? "Sending..." : "Send"}
+            {loading ? "Retreiving songs..." : "Get recommendations"}
           </Button>
         </div>
 

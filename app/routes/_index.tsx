@@ -18,7 +18,7 @@ export default function Index() {
         <Nav />
       </div>
       <div className="flex flex-col items-center">
-      <DiscoverMusic />
+        <DiscoverMusic />
       </div>
     </div>
   );
