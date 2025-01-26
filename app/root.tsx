@@ -6,10 +6,9 @@ import {
   ScrollRestoration,
 } from "@remix-run/react";
 import type { LinksFunction, LoaderFunction } from "@remix-run/node";
-import { redirect } from "@remix-run/node";
 import { Amplify } from "aws-amplify";
 import awsconfig from "../src/aws-exports";
-import { getCurrentUser } from "aws-amplify/auth";
+import "../app/utils/amplify";
 
 import "./tailwind.css";
 
@@ -31,24 +30,6 @@ export const links: LinksFunction = () => [
 ];
 
 Amplify.configure(awsconfig);
-
-export const loader: LoaderFunction = async ({ request }) => {
-  const url = new URL(request.url);
-  const pathname = url.pathname;
-
-  try {
-    await getCurrentUser();
-    if (pathname === "/login" || pathname === "/register") {
-      return redirect("/");
-    }
-    return null;
-  } catch (error) {
-    if (pathname !== "/login" && pathname !== "/register") {
-      return redirect("/login");
-    }
-    return null;
-  }
-};
 
 export function Layout({ children }: { children: React.ReactNode }) {
   return <>{children}</>;

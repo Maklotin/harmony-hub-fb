@@ -30,12 +30,10 @@ export default function Login() {
   }, [navigate]);
 
   const handleLogin = async () => {
+    console.log("Attempting login...");
     try {
-      await signIn({
-        username: email,
-        password: password,
-      });
-      navigate("/");
+      await signIn({ username: email, password });
+      navigate("/", { replace: true });
     } catch (error) {
       setError((error as Error).message || "An error occurred during sign-in");
       console.error("Error signing in:", error);
@@ -49,7 +47,10 @@ export default function Login() {
         <Box>
           <form
             className="flex flex-col items-center"
-            onSubmit={(e) => e.preventDefault()}
+            onSubmit={(e) => {
+              e.preventDefault();
+              handleLogin();
+            }}
           >
             <h3 className="mt-12">Velkommen til</h3>
             <h1 className="">Harmony Hub!</h1>
@@ -78,16 +79,9 @@ export default function Login() {
               </div>
             )}
             <Button type="submit">
-              <p className="drop-shadow-buttonText2" onClick={handleLogin}>
-                Logg Inn
-              </p>
+              <p className="drop-shadow-buttonText2">Logg Inn</p>
             </Button>
-            <h4>Eller</h4>
-            <Button className="flex">
-              <i className="ri-google-fill mr-2 drop-shadow-buttonText1"></i>
-              <p className="text-lg drop-shadow-buttonText1">Google logg inn</p>
-            </Button>
-            <h5>Har du ikke en bruker?</h5>
+            <h5 className="mt-6">Har du ikke en bruker?</h5>
             <Textlink className="mb-12" to="/register">
               <h6>Registrer bruker</h6>
             </Textlink>

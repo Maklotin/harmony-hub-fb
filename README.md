@@ -1,40 +1,9 @@
-# Welcome to Remix!
+# Welcome to Harmony Hub!
 
-- 📖 [Remix docs](https://remix.run/docs)
-
-## Development
-
-Run the dev server:
-
-```shellscript
-npm run dev
-```
-
-## Deployment
-
-First, build your app for production:
-
-```sh
-npm run build
-```
-
-Then run the app in production mode:
-
-```sh
-npm start
-```
-
-Now you'll need to pick a host to deploy it to.
-
-### DIY
-
-If you're familiar with deploying Node applications, the built-in Remix app server is production-ready.
-
-Make sure to deploy the output of `npm run build`
-
-- `build/server`
-- `build/client`
-
-## Styling
-
-This template comes with [Tailwind CSS](https://tailwindcss.com/) already configured for a simple default starting experience. You can use whatever css framework you prefer. See the [Vite docs on css](https://vitejs.dev/guide/features.html#css) for more information.
+to set up locally, all you have to do is:
+1. Make sure to have node and git installed.
+2. Clone this repository.
+3. Run `npm i` in the terminal in your code editor.
+4. Create an `.env` file and ask Mikkel for the AWS and Anthropic API keys on Slack.
+5. Run `npm run dev` in the terminal.
+6. Open your browser and go to `localhost:5173`
