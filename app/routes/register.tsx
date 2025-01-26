@@ -20,7 +20,7 @@ export default function Register() {
         username: email,
         password: password,
       });
-      setSuccess("Sign-up successful. Please confirm your email.");
+      setSuccess("Account registered!");
     } catch (error) {
       setError((error as Error).message || "An error occurred during sign-up");
       console.error("Error signing up:", error);
