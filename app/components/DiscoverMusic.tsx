@@ -36,7 +36,7 @@ const selectStyles = {
     border: "none",
     transition: "all 0.3s ease-in-out",
     "&:hover": {
-      borderColor: "#724E91",
+      border: "1px solid #724E91",
       scale: "1.1",
     },
     boxShadow: "4px solid #E54F6D",

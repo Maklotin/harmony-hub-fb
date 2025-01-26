@@ -14,8 +14,9 @@ to set up locally, all you have to do is:
 9. Select "mikkel" IAM User
 10. Create a new access key with a descriptive description
 11. Follow the instructions in the terminal
+12. Pull backend from Amplify App by running `amplify pull --appId [Ask Mikkel for appId] --envName dev`
 ## All set!
-12. Run `npm run dev` in the terminal
-13. Open your browser and go to `localhost:5173` 
+13. Run `npm run dev` in the terminal
+14. Open your browser and go to `localhost:5173` 
 
 That's it! Now the website should work on your local machine!

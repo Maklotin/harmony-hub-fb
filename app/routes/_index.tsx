@@ -26,7 +26,7 @@ const storeUserData = async () => {
     }
 
     // Make an authenticated request to your API Gateway endpoint
-    await fetch('https://c0eprlqmdf.execute-api.eu-north-1.amazonaws.com/V2', {
+    await fetch('https://2ti3a1zg47.execute-api.eu-north-1.amazonaws.com/v1/user', {
       method: 'POST',
       headers: {
         Authorization: token,  // Attach the ID token for authentication

@@ -193,7 +193,7 @@ export function Navbutton({ icon, className, to, children, ...props }: Navbutton
     <Link
       to={to}
       className={cn(
-        "text-blush hover:text-saffron transition-all duration-300 flex flex-row ",
+        "text-blush hover:text-saffron focus:text-orange-500 transition-all duration-300 flex flex-row ",
         className
       )}
       {...props}

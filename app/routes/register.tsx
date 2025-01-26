@@ -36,40 +36,40 @@ export default function Register() {
             className="flex flex-col items-center justify-center"
             onSubmit={(e) => e.preventDefault()}
           >
-            <h2 className="mt-12 underline">Registrer bruker</h2>
+            <h2 className="mt-12 underline">Register account</h2>
             <div className="flex flex-col items-center">
-              <h4 className="mt-4">Brukernavn</h4>
+              <h4 className="mt-4">Username</h4>
               <TextInput
                 className="mt-4"
                 type="text"
-                placeholder="navn navnesen"
+                placeholder="name nameson"
                 // value={email}
                 // onChange={(e) => setEmail(e.target.value)}
                 required
               />
-              <h4 className="mt-4">Epost</h4>
+              <h4 className="mt-4">Email</h4>
               <TextInput
                 className="mt-4"
                 type="email"
-                placeholder="navn@epost.no"
+                placeholder="name@email.com"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
               />
-              <h4 className="mt-4">Passord</h4>
+              <h4 className="mt-4">Password</h4>
               <TextInput
                 className="mt-4"
                 type="password"
-                placeholder="passord123"
+                placeholder="pass1234"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
               />
-              <h4 className="mt-4">Bekreft passord</h4>
+              <h4 className="mt-4">Confirm password</h4>
               <TextInput
                 className="mt-4 mb-12"
                 type="password"
-                placeholder="passord123"
+                placeholder="pass1234"
                 required
               />
               <Button
@@ -77,7 +77,7 @@ export default function Register() {
                 onClick={handleRegisterUser}
                 className="bg-emerald !shadow-darkForest"
               >
-                <p>Fullfør registrering</p>
+                <p>Register account</p>
                 <i className="ri-check-line ml-2"></i>
               </Button>
             </div>
@@ -98,7 +98,7 @@ export default function Register() {
               </div>
             )}
             <Textlink to="/login" className="mb-4">
-              <p>Gå tilbake til innlogging</p>
+              <p>Back to login</p>
             </Textlink>
           </form>
         </Box>

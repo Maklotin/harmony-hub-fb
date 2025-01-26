@@ -52,21 +52,21 @@ export default function Login() {
               handleLogin();
             }}
           >
-            <h3 className="mt-12">Velkommen til</h3>
+            <h3 className="mt-12">Welcome to</h3>
             <h1 className="">Harmony Hub!</h1>
-            <h5 className=" mt-12">Brukernavn eller epost</h5>
+            <h5 className=" mt-12">Email</h5>
             <TextInput
               className="mt-4"
               type="text"
-              placeholder="navn.navnesen@epost.no"
+              placeholder="name@email.com"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
-            <h4 className="mt-4">Passord</h4>
+            <h4 className="mt-4">Password</h4>
             <TextInput
               className="mt-4"
               type="password"
-              placeholder="passord123"
+              placeholder="pass1234"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
@@ -79,11 +79,11 @@ export default function Login() {
               </div>
             )}
             <Button type="submit">
-              <p className="drop-shadow-buttonText2">Logg Inn</p>
+              <p className="drop-shadow-buttonText2">Log in</p>
             </Button>
-            <h5 className="mt-6">Har du ikke en bruker?</h5>
+            <h5 className="mt-6">No account?</h5>
             <Textlink className="mb-12" to="/register">
-              <h6>Registrer bruker</h6>
+              <h6>Register account</h6>
             </Textlink>
           </form>
         </Box>
