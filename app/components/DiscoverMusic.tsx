@@ -40,7 +40,7 @@ const selectStyles = {
       scale: "1.1",
     },
     "&:focus": {
-      backgroundColor: "#ed8936"
+      backgroundColor: "#ed8936",
     },
     boxShadow: "4px solid #E54F6D",
   }),
@@ -285,16 +285,24 @@ const DiscoverMusic = () => {
             onChange={(e) => setInputText(e.target.value)}
             disabled={loading}
           />
+          {!selectedGenre || !selectedTheme || !selectedTempo ? (
+            <p className="text-red-500 mt-4 text-xs">
+              Please select genre, theme and tempo to get recommendations.
+            </p>
+          ) : (
+            <></>
+          )}
           <Button
             onClick={sendMessageToClaude}
-            disabled={loading}
+            disabled={
+              loading || !selectedGenre || !selectedTheme || !selectedTempo
+            }
             type="submit"
             className="disabled:bg-blush disabled:!shadow-ultraViolet disabled:cursor-not-allowed"
           >
             {loading ? "Retreiving songs..." : "Get recommendations"}
           </Button>
         </div>
-
         {error && (
           <div
             className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4"

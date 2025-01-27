@@ -24,7 +24,7 @@ export function Button({ className, children, ...props }: ButtonProps) {
   return (
     <button
       className={cn(
-        "transition-all duration-300 hover:transform hover:scale-105 bg-saffron p-2 w-80 rounded-md !shadow-blush shadow-primaryButton hover:bg-blush text-primary hover:shadow-primaryButtonHover hover:!shadow-ultraViolet text-xl my-4 flex justify-center items-center hover:cursor-pointer",
+        "transition-all duration-300 hover:transform hover:scale-105 bg-saffron focus:bg-orange-500 p-2 w-80 rounded-md !shadow-blush shadow-primaryButton hover:bg-blush text-primary hover:shadow-primaryButtonHover hover:!shadow-ultraViolet text-xl my-4 flex justify-center items-center hover:cursor-pointer",
         className
       )}
       {...props}
