@@ -39,6 +39,9 @@ const selectStyles = {
       border: "1px solid #724E91",
       scale: "1.1",
     },
+    "&:focus": {
+      backgroundColor: "#ed8936"
+    },
     boxShadow: "4px solid #E54F6D",
   }),
   menu: (provided: any) => ({
@@ -278,7 +281,7 @@ const DiscoverMusic = () => {
           <TextInput
             className="w-96"
             placeholder="Anything you want to specify? (Optional)"
-            value={inputText}
+            value={inputText === "No additional information" ? "" : inputText}
             onChange={(e) => setInputText(e.target.value)}
             disabled={loading}
           />
@@ -303,7 +306,10 @@ const DiscoverMusic = () => {
 
         <div className="flex flex-wrap justify-center space-x-4 mt-4">
           {loading ? (
-            <LoadingSpinner />
+            <div>
+              <LoadingSpinner />
+              <h1 className="sr-only">Loading songs</h1>
+            </div>
           ) : (
             songs &&
             Object.values(songs).map((song: any, index: number) => (

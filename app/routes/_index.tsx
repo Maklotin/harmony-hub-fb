@@ -15,21 +15,17 @@ export const meta: MetaFunction = () => {
 
 const storeUserData = async () => {
   try {
-    // Get the current authentication session
     const session = await fetchAuthSession();
     
-    // Extract the JWT token from the session
     const token = session.tokens?.idToken?.toString();
 
     if (!token) {
       throw new Error('User is not authenticated');
     }
-
-    // Make an authenticated request to your API Gateway endpoint
     await fetch('https://2ti3a1zg47.execute-api.eu-north-1.amazonaws.com/v1/user', {
       method: 'POST',
       headers: {
-        Authorization: token,  // Attach the ID token for authentication
+        Authorization: token,  
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
@@ -37,16 +33,15 @@ const storeUserData = async () => {
       }),
     });
 
-    console.log('Data sent successfully!');
+    console.log('custom user data sent!');
   } catch (error) {
-    console.error('Error storing user data:', error);
+    console.error('Error:', error);
   }
 };
 
 
 export default function Index() {
   const [loginId, setLoginId] = useState<string | null>(null);
-  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchUser = async () => {

@@ -40,10 +40,11 @@ export default function Settings() {
         <ClickableLogo />
         <Nav />
       </div>
-      <div className="flex justify-center h-screen">
-        <Box>
-          <h1>User settings</h1>
+      <div className="flex justify-center w-full">
+        <Box className="p-4 w-1/2">
+          <h1 className="mb-8 text-center">User settings</h1>
           <p>email: {loginId}</p>
+          <p className="my-8 text-saffron">more coming soon...</p>
           <Button onClick={handleLogOut}>Log out</Button>
         </Box>
       </div>

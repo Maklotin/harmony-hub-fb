@@ -72,7 +72,7 @@ export function Textlink({
 
 export function ClickableLogo() {
   return (
-    <div className="flex justify-start">
+    <header className="flex justify-start">
       <Link to="/">
         <img
           alt="Harmony Hub Logo"
@@ -81,7 +81,7 @@ export function ClickableLogo() {
           className="max-w-96 p-8"
         />
       </Link>
-    </div>
+    </header>
   );
 }
 
@@ -144,7 +144,7 @@ export function SongCard({
       </p>
       <img
         src={albumcover}
-        alt={album + " album cover"}
+        alt={artist + "'s " + album + " album cover"}
         className="w-60 shadow-imgShadow shadow-blush my-4"
       />
       <h5
