@@ -96,11 +96,11 @@ export default function Login() {
             <Button type="submit">
               <p className="drop-shadow-buttonText2">Log in</p>
             </Button>
-            <p>or</p>
+            {/* <p>or</p>
             <Button type="button" onClick={handleGoogleLogin} className="mt-4">
               <i className="ri-google-fill"></i>
               <p className="drop-shadow-buttonText2">Log in with Google</p>
-            </Button>
+            </Button> */}
             <h5 className="mt-6">No account?</h5>
             <Textlink className="mb-12" to="/register">
               <h6>Register account</h6>

@@ -4,6 +4,8 @@ import Anthropic from "@anthropic-ai/sdk";
 import optionsJSON from "../utils/options.json";
 import { Box, Button, LoadingSpinner, SongCard, TextInput } from "./ui-library";
 import responseStructure from "../utils/responseStructure.json";
+import { arrayUnion, doc, setDoc } from "firebase/firestore";
+import { auth, db } from "~/utils/firebase";
 
 interface Message {
   isUser: boolean;
@@ -83,6 +85,7 @@ const DiscoverMusic = () => {
   const [inputText, setInputText] = useState("No additional information");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [success, setSuccess] = useState<string | null>(null);
   const [advanced, setAdvanced] = useState(false);
   const [songs, setSongs] = useState<any>(null);
 
@@ -232,9 +235,36 @@ const DiscoverMusic = () => {
     }
   };
 
-  handleSave = async () => {
-    
-  }
+  const handleSave = async () => {
+    if (!auth.currentUser) {
+      setError("You must be logged in to save data.");
+      return;
+    }
+
+    const dataToSave = {
+      genre: selectedGenre,
+      theme: selectedTheme,
+      tempo: selectedTempo,
+      customPrompt: inputText,
+      songs: songs,
+      timestamp: new Date(),
+    };
+
+    try {
+      const userDocRef = doc(db, "users", auth.currentUser.uid);
+      await setDoc(
+        userDocRef,
+        {
+          history: arrayUnion(dataToSave),
+        },
+        { merge: true }
+      );
+      setSuccess("Saved recommendation!");
+    } catch (error) {
+      setError((error as Error).message || "An error occurred saving data");
+      console.error("Error saving recommendation:", error);
+    }
+  };
 
   return (
     <Box className="p-4 w-2/3">

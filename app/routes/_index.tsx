@@ -24,15 +24,20 @@ export default function Index() {
         setIsAuthenticated(true);
       } else {
         setIsAuthenticated(false);
-        navigate("/login");
       }
     });
 
     return () => unsubscribe();
-  }, [navigate]);
+  }, []);
+
+  useEffect(() => {
+    if (isAuthenticated === false) {
+      navigate("/login");
+    }
+  }, [isAuthenticated, navigate]);
 
   if (isAuthenticated === null) {
-    return <div><p>Loading...</p></div>;
+    return <div>Loading...</div>; // Show a loading state while checking authentication
   }
 
   return <div>{isAuthenticated ? <Home /> : null}</div>;

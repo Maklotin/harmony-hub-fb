@@ -16,30 +16,37 @@ export default function Settings() {
   const [newPassword, setNewPassword] = useState<string>("");
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState<string | null>(null);
+  const [isLoggingOut, setIsLoggingOut] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
+    let mounted = true;
     const unsubscribe = onAuthStateChanged(auth, (user) => {
-      if (user) {
-        setLoginId(user.email || null);
-        setUsername(user.displayName || "");
-      } else {
-        navigate("/login");
+      if (mounted) {
+        if (user) {
+          setLoginId(user.email || null);
+          setUsername(user.displayName || "");
+        } else if (!isLoggingOut) {
+          navigate("/login");
+        }
       }
     });
 
-    return () => unsubscribe();
-  }, [navigate]);
+    return () => {
+      mounted = false;
+      unsubscribe();
+    };
+  }, [navigate, isLoggingOut]);
 
   const handleUpdateProfile = async () => {
     try {
       if (auth.currentUser) {
         await updateProfile(auth.currentUser, { displayName: username });
-        setSuccess("Profile updated successfully!");
+        setSuccess("Profile updated!");
       }
     } catch (error) {
       setError(
-        (error as Error).message || "An error occurred while updating profile"
+        (error as Error).message || "An error occurred updating profile"
       );
       console.error("Error updating profile:", error);
     }
@@ -49,7 +56,7 @@ export default function Settings() {
     try {
       if (auth.currentUser) {
         await updatePassword(auth.currentUser, newPassword);
-        setSuccess("Password updated successfully!");
+        setSuccess("Password updated!");
       }
     } catch (error) {
       setError(
@@ -61,11 +68,16 @@ export default function Settings() {
 
   const handleLogOut = async () => {
     try {
+      setIsLoggingOut(true);
       await signOut(auth);
-      navigate("/login");
+      setTimeout(() => {
+        navigate("/login", { replace: true });
+      }, 500); 
     } catch (error) {
-      setError((error as Error).message || "An error occurred during logout");
-      console.error("Error signing out:", error);
+      setError((error as Error).message || "An error occurred");
+      console.error("Error logging out:", error);
+    } finally {
+      setIsLoggingOut(false);
     }
   };
 
@@ -92,7 +104,7 @@ export default function Settings() {
               Update Username
             </Button>
           </div>
-          <div className="my-8">
+          <div className="my-4">
             <h4>Update Password</h4>
             <TextInput
               className="mt-4"
