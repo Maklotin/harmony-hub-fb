@@ -5,9 +5,14 @@ import {
   Textlink,
   ClickableLogo,
 } from "~/components/ui-library";
-import { signIn, getCurrentUser } from "aws-amplify/auth";
 import { useState, useEffect } from "react";
 import { useNavigate } from "@remix-run/react";
+import {
+  signInWithEmailAndPassword,
+  signInWithPopup,
+  onAuthStateChanged,
+} from "firebase/auth";
+import { auth, googleProvider } from "~/utils/firebase";
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -17,26 +22,36 @@ export default function Login() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const checkUser = async () => {
-      try {
-        await getCurrentUser();
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (user) {
         navigate("/");
-      } catch {
-        // User is not authenticated
       }
-    };
+    });
 
-    checkUser();
+    return () => unsubscribe();
   }, [navigate]);
 
   const handleLogin = async () => {
     console.log("Attempting login...");
     try {
-      await signIn({ username: email, password });
+      await signInWithEmailAndPassword(auth, email, password);
       navigate("/", { replace: true });
     } catch (error) {
       setError((error as Error).message || "An error occurred during sign-in");
       console.error("Error signing in:", error);
+    }
+  };
+
+  const handleGoogleLogin = async () => {
+    console.log("Attempting Google login...");
+    try {
+      await signInWithPopup(auth, googleProvider);
+      navigate("/", { replace: true });
+    } catch (error) {
+      setError(
+        (error as Error).message || "An error occurred during Google sign-in"
+      );
+      console.error("Error signing in with Google:", error);
     }
   };
 
@@ -80,6 +95,11 @@ export default function Login() {
             )}
             <Button type="submit">
               <p className="drop-shadow-buttonText2">Log in</p>
+            </Button>
+            <p>or</p>
+            <Button type="button" onClick={handleGoogleLogin} className="mt-4">
+              <i className="ri-google-fill"></i>
+              <p className="drop-shadow-buttonText2">Log in with Google</p>
             </Button>
             <h5 className="mt-6">No account?</h5>
             <Textlink className="mb-12" to="/register">

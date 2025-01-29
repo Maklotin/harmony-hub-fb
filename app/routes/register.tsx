@@ -6,20 +6,32 @@ import {
   TextInput,
   Textlink,
 } from "~/components/ui-library";
-import { signUp } from "aws-amplify/auth";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { auth, db } from "~/utils/firebase";
+import { doc, setDoc } from "firebase/firestore";
 
 export default function Register() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [username, setUsername] = useState("");
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState<string | null>(null);
 
   const handleRegisterUser = async () => {
     try {
-      await signUp({
-        username: email,
-        password: password,
+      const userCredential = await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+      const user = userCredential.user;
+
+      await setDoc(doc(db, "users", user.uid), {
+        email: user.email,
+        username: username,
+        history: [],
       });
+
       setSuccess("Account registered!");
     } catch (error) {
       setError((error as Error).message || "An error occurred during sign-up");
@@ -34,7 +46,10 @@ export default function Register() {
         <Box>
           <form
             className="flex flex-col items-center justify-center"
-            onSubmit={(e) => e.preventDefault()}
+            onSubmit={(e) => {
+              e.preventDefault();
+              handleRegisterUser();
+            }}
           >
             <h2 className="mt-12 underline">Register account</h2>
             <div className="flex flex-col items-center">
@@ -43,8 +58,8 @@ export default function Register() {
                 className="mt-4"
                 type="text"
                 placeholder="name nameson"
-                // value={email}
-                // onChange={(e) => setEmail(e.target.value)}
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
                 required
               />
               <h4 className="mt-4">Email</h4>
@@ -72,11 +87,7 @@ export default function Register() {
                 placeholder="pass1234"
                 required
               />
-              <Button
-                type="submit"
-                onClick={handleRegisterUser}
-                className="bg-emerald !shadow-darkForest"
-              >
+              <Button type="submit" className="bg-emerald !shadow-darkForest">
                 <p>Register account</p>
                 <i className="ri-check-line ml-2"></i>
               </Button>
@@ -86,7 +97,7 @@ export default function Register() {
                 className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4"
                 role="alert"
               >
-                <p className="font-bold">{error}</p> 
+                <p className="font-bold">{error}</p>
               </div>
             )}
             {success && (

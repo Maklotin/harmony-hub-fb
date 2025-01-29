@@ -232,6 +232,10 @@ const DiscoverMusic = () => {
     }
   };
 
+  handleSave = async () => {
+    
+  }
+
   return (
     <Box className="p-4 w-2/3">
       <form
@@ -319,10 +323,14 @@ const DiscoverMusic = () => {
               <h1 className="sr-only">Loading songs</h1>
             </div>
           ) : (
-            songs &&
-            Object.values(songs).map((song: any, index: number) => (
-              <SongCard key={index} song={song} />
-            ))
+            songs && (
+              <>
+                {Object.values(songs).map((song: any, index: number) => (
+                  <SongCard key={index} song={song} />
+                ))}
+                <Button onClick={handleSave}>Save</Button>
+              </>
+            )
           )}
         </div>
       </form>
